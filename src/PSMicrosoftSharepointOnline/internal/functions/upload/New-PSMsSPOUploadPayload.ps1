@@ -77,11 +77,11 @@
          [switch] $AsText,
         [Parameter()]
         [switch] $AsBinary,
-        [Parameter()] 
+        [Parameter()]
         [System.Text.Encoding] $Encoding = [System.Text.Encoding]::UTF8,
-        [Parameter()] 
+        [Parameter()]
         [string] $ContentType,
-        [Parameter()] 
+        [Parameter()]
         [string] $ETag
     )
 
