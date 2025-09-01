@@ -40,7 +40,7 @@
 
     process {
         if ($null -eq $InputObject) {
-            return , ([byte[]]@()) # empty byte array
+            return , ([byte[]]@())
         }
 
         switch ($InputObject) {
