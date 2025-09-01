@@ -16,4 +16,6 @@
 
 	'DriveItemSite.Get.Failed'  = "Failed to retrieve items from drive '{0}' in site '{1}', folder path '{2}'"
 	'DriveItemGroup.Get.Failed' = "Failed to retrieve items from drive in group '{0}', folder path '{1}'"
+
+	'Batch.Invoke'                   = 'Invoke batch command with the following Ids {0}'
 }

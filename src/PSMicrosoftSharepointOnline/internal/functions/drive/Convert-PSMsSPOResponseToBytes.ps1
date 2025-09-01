@@ -23,18 +23,6 @@
     .OUTPUTS
         System.Byte[]
 
-    .EXAMPLE
-        $resp = Invoke-EntraRequest -Service $service -Path $path -Method Get -NoJson
-        $bytes = Convert-PSMsSPOResponseToBytes $resp
-        [System.IO.File]::WriteAllBytes('C:\Temp\archive.zip', $bytes)
-
-        Downloads a ZIP file from SharePoint and writes it to disk.
-
-    .EXAMPLE
-        'Hello World' | Convert-PSMsSPOResponseToBytes -Encoding ASCII
-
-        Encodes a string as ASCII into byte[].
-
     .NOTES
         - Always call Invoke-EntraRequest with -NoJson for file downloads.
         - Graph may send small text files as [string], larger/binary as [byte[]] or Stream.

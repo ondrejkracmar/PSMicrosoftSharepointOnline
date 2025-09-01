@@ -12,10 +12,6 @@
         The drive-root relative path to encode. Can be empty or nested
         (e.g., 'Folder A/Sub B').
 
-    .EXAMPLE
-        PS> Convert-PSMsSPOToUrlEncodedPath -RelativePath 'Folder A/Sub B'
-        Folder%20A/Sub%20B
-
     .NOTES
         Internal helper for building Graph paths like:
         drives/{driveId}/root:/{encodedPath}/{fileName}:/content

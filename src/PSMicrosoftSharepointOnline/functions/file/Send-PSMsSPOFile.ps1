@@ -43,10 +43,10 @@
         For small PUT, returns a batch request object instead of executing.
 
     .EXAMPLE
-        Send-PSMsSPOFile -DriveId $drive.Id -FolderPath 'Documents/Specs' -FilePath 'C:\Temp\design.docx'
+        PS C:\> Send-PSMsSPOFile -DriveId $drive.Id -FolderPath 'Documents/Specs' -FilePath 'C:\Temp\design.docx'
 
     .EXAMPLE
-        Send-PSMsSPOFile -DriveId $drive.Id -ParentItemId $folder.Id -FilePath 'C:\Temp\video.mp4' -UseUploadSession
+        PS C:\> Send-PSMsSPOFile -DriveId $drive.Id -ParentItemId $folder.Id -FilePath 'C:\Temp\video.mp4' -UseUploadSession
     #>
     [OutputType('PSMsSPO.DriveItem')]
     [CmdletBinding(SupportsShouldProcess = $true, DefaultParameterSetName = 'Path')]
