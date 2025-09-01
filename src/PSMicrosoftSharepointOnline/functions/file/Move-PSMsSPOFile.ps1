@@ -109,7 +109,7 @@
         }
         else {
             Invoke-PSFProtectedCommand -ActionString 'DriveItem.Move' -ActionStringValues $ItemId, $DestinationFolderId -Target $DriveId -ScriptBlock {
-                Invoke-EntraRequest -Service $service -Path $path -Method Patch -Header $header -Body $body -header   -ErrorAction Stop
+                Invoke-EntraRequest -Service $service -Path $path -Method Patch -Header $header -Body $body -ErrorAction Stop
             } -EnableException:$EnableException -Confirm:$false -PSCmdlet $PSCmdlet -Continue -RetryCount $commandRetryCount -RetryWait $commandRetryWait
         }
     }
