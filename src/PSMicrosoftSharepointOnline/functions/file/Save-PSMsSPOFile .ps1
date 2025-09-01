@@ -59,7 +59,7 @@
 
     .EXAMPLE
         PS C:\> Get-PSMsSPODriveItem -SiteUrl https://contoso/sites/ProjX -DriveName Documents -FolderPath 'Specs' | Save-PSMsSPOFile -OutputDirectory 'C:\Temp'
-        
+
     #>
     [OutputType('System.IO.FileInfo')]
     [CmdletBinding(SupportsShouldProcess = $true, DefaultParameterSetName = 'InputObject')]
@@ -114,7 +114,7 @@
                         [PSMicrosoftEntraID.Batch.Request] @{ Method = 'GET'; Url = ('/{0}' -f $path); Body = $body; Headers = $header }
                     }
                     else {
-                        $target = Join-Path -Path ($OutputDirectory | Resolve-Path).Path -ChildPath $itemInputObject.Name 
+                        $target = Join-Path -Path ($OutputDirectory | Resolve-Path).Path -ChildPath $itemInputObject.Name
                         Invoke-PSFProtectedCommand -ActionString 'DriveItem.Save' -ActionStringValues $itemInputObject.Id, $target -Target $itemInputObject.WebUrl -ScriptBlock {
                             [byte[]] $bytes = Convert-PSMsSPOResponseToBytes -InputObject (Invoke-EntraRequest -Service $service -Path $path -Method Get -Header $header -Raw -ErrorAction Stop)
                             [System.IO.File]::WriteAllBytes($target, $bytes)
@@ -133,7 +133,7 @@
                         $target = Join-Path -Path ($FolderPath | Resolve-Path).Path -ChildPath 'download.bin'
                     }
                     else {
-                        $target = Join-Path -Path ($FolderPath | Resolve-Path).Path -ChildPath $OutFile 
+                        $target = Join-Path -Path ($FolderPath | Resolve-Path).Path -ChildPath $OutFile
                     }
                     Invoke-PSFProtectedCommand -ActionString 'DriveItem.Save' -ActionStringValues  $ItemId, $target -Target $DriveId -ScriptBlock {
                         [byte[]] $bytes = Convert-PSMsSPOResponseToBytes -InputObject (Invoke-EntraRequest -Service $service -Path $path -Method Get -Header $header -Raw -ErrorAction Stop)
@@ -148,7 +148,7 @@
                     [PSMicrosoftEntraID.Batch.Request] @{ Method = 'GET'; Url = ('/{0}' -f $path); Body = $body; Headers = $header }
                 }
                 else {
-                    $target = Join-Path -Path ($FolderPath | Resolve-Path).Path -ChildPath $FileName 
+                    $target = Join-Path -Path ($FolderPath | Resolve-Path).Path -ChildPath $FileName
                     Invoke-PSFProtectedCommand -ActionString 'DriveItem.Save' -ActionStringValues $ItemId, $target -Target $DriveId -ScriptBlock {
                         [byte[]] $bytes = Convert-PSMsSPOResponseToBytes -InputObject (Invoke-EntraRequest -Service $service -Path $path -Method Get -Header $header -Raw -ErrorAction Stop)
                         [System.IO.File]::WriteAllBytes($target, $bytes)

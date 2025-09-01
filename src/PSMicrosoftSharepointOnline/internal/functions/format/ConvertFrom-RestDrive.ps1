@@ -1,4 +1,4 @@
-function ConvertFrom-RestDrive {
+﻿function ConvertFrom-RestDrive {
 	<#
 	.SYNOPSIS
 		Converts a REST API response object representing a group into a more user-friendly format.
