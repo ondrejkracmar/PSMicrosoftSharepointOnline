@@ -6,7 +6,7 @@
 $modules = @("Pester", "PSFramework", "PSModuleDevelopment", "PSScriptAnalyzer","PlatyPS")
 
 # Automatically add missing dependencies
-$data = Import-PowerShellDataFile -Path "$PSScriptRoot\..\PSMicrosoftEntraID\PSMicrosoftEntraID.psd1"
+$data = Import-PowerShellDataFile -Path "$PSScriptRoot\..\PSMicrosoftSharepointOnline\PSMicrosoftSharepointOnline.psd1"
 foreach ($dependency in $data.RequiredModules) {
     if ($dependency -is [string]) {
         if ($modules -contains $dependency) { continue }

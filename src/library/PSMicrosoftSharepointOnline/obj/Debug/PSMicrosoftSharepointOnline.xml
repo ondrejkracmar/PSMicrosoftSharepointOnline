@@ -1,0 +1,321 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PSMicrosoftSharepointOnline</name>
+    </assembly>
+    <members>
+        <member name="T:PSMicrosoftSharepointOnline.Commands.NewPSMsSPOBatchRequest">
+            <summary>
+            Cmdlet that receives Request objects from the pipeline and produces multiple 
+            <see cref="T:PSMicrosoftEntraID.Batch.BatchRequestPayload"/> objects, each containing up to 20 sub-requests. 
+            In each chunk, request Ids are reassigned to "1", "2", etc. to comply with the 
+            Microsoft Graph batch limit of 1..20 sub-requests per batch.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Commands.NewPSMsSPOBatchRequest.InputObject">
+            <summary>
+            An array of Request objects coming from the pipeline. 
+            Each item is a sub-request definition (method, url, body, etc.).
+            </summary>
+        </member>
+        <member name="F:PSMicrosoftSharepointOnline.Commands.NewPSMsSPOBatchRequest._buffer">
+            <summary>
+            Internal buffer to accumulate up to 20 requests before emitting a batch payload.
+            </summary>
+        </member>
+        <member name="M:PSMicrosoftSharepointOnline.Commands.NewPSMsSPOBatchRequest.BeginProcessing">
+            <summary>
+            Called once before pipeline input is processed.
+            </summary>
+        </member>
+        <member name="M:PSMicrosoftSharepointOnline.Commands.NewPSMsSPOBatchRequest.ProcessRecord">
+            <summary>
+            Called once for each pipeline block of Request objects.
+            We accumulate them, and each time we hit 20, we emit a new BatchRequestPayload 
+            with Ids reindexed from "1" up to "n".
+            </summary>
+        </member>
+        <member name="M:PSMicrosoftSharepointOnline.Commands.NewPSMsSPOBatchRequest.EndProcessing">
+            <summary>
+            Called after all pipeline input has been processed. 
+            If there's any leftover (20) requests in _buffer, we emit one final payload.
+            </summary>
+        </member>
+        <member name="M:PSMicrosoftSharepointOnline.Commands.NewPSMsSPOBatchRequest.EmitOnePayload(System.Collections.Generic.List{PSMicrosoftEntraID.Batch.Request})">
+            <summary>
+            Helper method to create a single BatchRequestPayload from up to 20 Request objects, 
+            reindexing their Ids from "1" to the number of requests in this chunk.
+            </summary>
+            <param name="requests">A list of up to 20 Request objects.</param>
+        </member>
+        <member name="T:PSMicrosoftSharepointOnline.Files.Drives.Drive">
+            <summary>
+            Represents a SharePoint Online / Microsoft Graph Folder (document library root or subfolder).
+            Designed for JSON (de)serialization via DataContract and DataMember attributes.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Drive.Id">
+            <summary>
+            The unique identifier of the folder.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Drive.Name">
+            <summary>
+            The display name of the folder.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Drive.Description">
+            <summary>
+            The folder description.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Drive.WebUrl">
+            <summary>
+            The web URL of the folder.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Drive.CreatedDateTime">
+            <summary>
+            The date and time when the folder was created.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Drive.LastModifiedDateTime">
+            <summary>
+            The date and time when the folder was last modified.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Drive.DriveType">
+            <summary>
+            The drive type (e.g., "documentLibrary").
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Drive.Quota">
+            <summary>
+            Quota information for the folder (storage usage, remaining space, etc.).
+            </summary>
+        </member>
+        <member name="T:PSMicrosoftSharepointOnline.Files.Drives.Quota">
+            <summary>
+            Represents quota information for a SharePoint folder or document library.
+            Contains storage usage details such as total space, used space, and remaining quota.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Quota.Deleted">
+            <summary>
+            The total amount of space freed up after items were deleted (in bytes).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Quota.Remaining">
+            <summary>
+            The amount of available storage space remaining (in bytes).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Quota.State">
+            <summary>
+            The current state of the storage quota (e.g., "normal", "nearLimit", "exceeded").
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Quota.Total">
+            <summary>
+            The total size of the storage quota (in bytes).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Files.Drives.Quota.Used">
+            <summary>
+            The amount of storage space currently used (in bytes).
+            </summary>
+        </member>
+        <member name="T:PSMicrosoftSharepointOnline.Sites.SiteCollection">
+            <summary>
+            Represents site collection metadata for a site.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharepointOnline.Sites.SiteCollection.Hostname">
+            <summary>
+            The hostname of the site collection (e.g. "contoso.sharepoint.com").
+            </summary>
+        </member>
+        <member name="T:PSMicrosoftSharePointOnline.Files.Drives.DriveItem">
+            <summary>
+            Represents a file or folder item in a SharePoint Online / Teams document library.
+            Maps to the Microsoft Graph 'driveItem' resource returned by children listings.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.Id">
+            <summary>
+            Unique identifier of the item.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.Name">
+            <summary>
+            Display name of the item (file name or folder name).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.WebUrl">
+            <summary>
+            Browser URL pointing to the item.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.ETag">
+            <summary>
+            Entity tag for optimistic concurrency control.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.CTag">
+            <summary>
+            Content tag that changes when the item's content is updated (often omitted for folders).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.Size">
+            <summary>
+            Size of the item in bytes (folders may return null or 0).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.CreatedDateTime">
+            <summary>
+            Date and time when the item was created (with timezone offset).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.LastModifiedDateTime">
+            <summary>
+            Date and time when the item was last modified (with timezone offset).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.File">
+            <summary>
+            File-specific metadata; present when the item is a file.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.Folder">
+            <summary>
+            Folder-specific metadata; present when the item is a folder.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.DriveItem.ParentReference">
+            <summary>
+            Reference to the parent container; includes drive and path information.
+            Useful for reconstructing drive-relative paths.
+            </summary>
+        </member>
+        <member name="T:PSMicrosoftSharePointOnline.Files.Drives.FileHashInfo">
+            <summary>
+            Represents content hash information for a file.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.FileHashInfo.QuickXorHash">
+            <summary>
+            QuickXor hash commonly used by OneDrive/SharePoint for file change detection.
+            </summary>
+        </member>
+        <member name="T:PSMicrosoftSharePointOnline.Files.Drives.FileMetadata">
+            <summary>
+            Represents file-specific metadata for a drive item.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.FileMetadata.MimeType">
+            <summary>
+            MIME type of the file (e.g., "application/pdf").
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.FileMetadata.Hashes">
+            <summary>
+            Optional content hashes returned by Graph (e.g., quickXorHash).
+            </summary>
+        </member>
+        <member name="T:PSMicrosoftSharePointOnline.Files.Drives.FolderMetadata">
+            <summary>
+            Represents folder-specific metadata for a drive item.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.FolderMetadata.ChildCount">
+            <summary>
+            Number of direct child items inside the folder.
+            </summary>
+        </member>
+        <member name="T:PSMicrosoftSharePointOnline.Files.Drives.ParentItemInfo">
+            <summary>
+            Contains reference information about the parent/container of a drive item.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.ParentItemInfo.DriveId">
+            <summary>
+            Identifier of the drive that contains this item.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.ParentItemInfo.DriveType">
+            <summary>
+            Type of the drive (e.g., "documentLibrary").
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.ParentItemInfo.Path">
+            <summary>
+            Composite path of the parent within the drive (e.g., "/drive/root:/Folder/Subfolder").
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.ParentItemInfo.Id">
+            <summary>
+            Identifier of the parent item (container).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Files.Drives.ParentItemInfo.Name">
+            <summary>
+            Display name of the parent item.
+            </summary>
+        </member>
+        <member name="T:PSMicrosoftSharePointOnline.Sites.Site">
+            <summary>
+            Represents a SharePoint Online site as returned by Microsoft Graph API (v1.0).
+            Includes basic metadata such as identifiers, display name, description, URLs,
+            and references to site collection and root properties.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.Id">
+            <summary>
+            The unique identifier of the site in the format: hostname,siteId,webId.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.Name">
+            <summary>
+            The internal site name (short name, e.g. "BI4SG").
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.DisplayName">
+            <summary>
+            The display name of the site (user-friendly title).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.Description">
+            <summary>
+            The site description, if defined.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.WebUrl">
+            <summary>
+            The full web URL of the site (browser accessible).
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.CreatedDateTime">
+            <summary>
+            The date and time when the site was created.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.LastModifiedDateTime">
+            <summary>
+            The date and time when the site was last modified.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.Root">
+            <summary>
+            Indicates that this is the root site (present if the site is a root site).
+            Typically contains an empty object when returned.
+            </summary>
+        </member>
+        <member name="P:PSMicrosoftSharePointOnline.Sites.Site.SiteCollection">
+            <summary>
+            Provides information about the site collection that the current site belongs to.
+            Contains metadata such as the hostname of the tenant-level site collection.
+            This property helps identify the root site collection context of the site.
+            </summary>
+        </member>
+    </members>
+</doc>

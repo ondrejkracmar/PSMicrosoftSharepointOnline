@@ -75,7 +75,7 @@ steps:
        arguments: > # Use this to avoid newline characters in multiline string
           -WorkingDirectory '$(sourceDirectory)'
           -LocalRepo
-          -ModuleName "PSMicrosoftEntraID"
+          -ModuleName "PSMicrosoftSharepointOnline"
           -ModuleVersion '$(MajorMinorPatch)'
           -PreRelease '$(PreReleaseLabel)'
           -CommitsSinceVersion '$(CommitsSinceVersionSource)'
@@ -92,7 +92,7 @@ steps:
           -ArtifactFeedName '$(artifactFeedName)'
           -FeedUsername '$(FeedUsername)'
           -PersonalAccessToken '$(personalAccessToken)'
-          -ModuleName "PSMicrosoftEntraID"
+          -ModuleName "PSMicrosoftSharepointOnline"
           -ModuleVersion '$(MajorMinorPatch)'
           -PreRelease '$(PreReleaseLabel)'
           -CommitsSinceVersion '$(CommitsSinceVersionSource)'
@@ -105,9 +105,9 @@ steps:
        arguments: > # Use this to avoid newline characters in multiline string
           -AzureDevOpsOrganizationName '$(organizationName)'
           -AzureDevOpsProjectName '$(projectName)'
-          -AzureDevOpsRepositoryName "PSMicrosoftEntraID"
+          -AzureDevOpsRepositoryName "PSMicrosoftSharepointOnline"
           -AzureDevOpsUsername '$(azureDevOpsUsername)'
           -AzureDevOpsToken '$(azureDevOpsPAT)'
-          -GitHubRepositoryName "PSMicrosoftEntraID"
+          -GitHubRepositoryName "PSMicrosoftSharepointOnline"
           -GitHubUsername '$(gitHubUsername)'
           -GitHubToken '$(gitHubPAT)'

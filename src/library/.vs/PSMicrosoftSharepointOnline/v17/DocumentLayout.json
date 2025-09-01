@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projects\\PSModules\\PSMicrosoftSharepointOnline\\src\\library\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CD13C9AA-2345-1133-9985-DF72E2AF433F}|PSMicrosoftSharepointOnline\\PSMicrosoftSharepointOnline.csproj|c:\\projects\\psmodules\\psmicrosoftsharepointonline\\src\\library\\psmicrosoftsharepointonline\\commands\\newpsmsspobatchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD13C9AA-2345-1133-9985-DF72E2AF433F}|PSMicrosoftSharepointOnline\\PSMicrosoftSharepointOnline.csproj|solutionrelative:psmicrosoftsharepointonline\\commands\\newpsmsspobatchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NewPSMsSPOBatchRequest.cs",
+              "DocumentMoniker": "C:\\Projects\\PSModules\\PSMicrosoftSharepointOnline\\src\\library\\PSMicrosoftSharepointOnline\\Commands\\NewPSMsSPOBatchRequest.cs",
+              "RelativeDocumentMoniker": "PSMicrosoftSharepointOnline\\Commands\\NewPSMsSPOBatchRequest.cs",
+              "ToolTip": "C:\\Projects\\PSModules\\PSMicrosoftSharepointOnline\\src\\library\\PSMicrosoftSharepointOnline\\Commands\\NewPSMsSPOBatchRequest.cs",
+              "RelativeToolTip": "PSMicrosoftSharepointOnline\\Commands\\NewPSMsSPOBatchRequest.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-30T06:43:25.841Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

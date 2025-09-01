@@ -31,13 +31,13 @@
 	
 	process
 	{
-		try { $uri = '{0}{1}' -f (Get-PSFConfigValue -FullName 'PSMicrosoftSharepoitOnline.Client.Uri' -NotNull), $FunctionName }
+		try { $uri = '{0}{1}' -f (Get-PSFConfigValue -FullName 'PSMicrosoftSharepointOnline.Client.Uri' -NotNull), $FunctionName }
 		catch { $PSCmdlet.ThrowTerminatingError($_) }
 		$header = @{ }
 		
 		#region Authentication
-		$unprotectedToken = Get-PSFConfigValue -FullName 'PSMicrosoftSharepoitOnline.Client.UnprotectedToken'
-		$protectedToken = Get-PSFConfigValue -FullName 'PSMicrosoftSharepoitOnline.Client.ProtectedToken'
+		$unprotectedToken = Get-PSFConfigValue -FullName 'PSMicrosoftSharepointOnline.Client.UnprotectedToken'
+		$protectedToken = Get-PSFConfigValue -FullName 'PSMicrosoftSharepointOnline.Client.ProtectedToken'
 		
 		$authenticationDone = $false
 		if ($protectedToken -and -not $authenticationDone)

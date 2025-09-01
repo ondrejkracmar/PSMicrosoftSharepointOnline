@@ -16,7 +16,7 @@
 		The name of the repository to use for gathering dependencies from.
 #>
 param (
-	$WorkingDirectory = "$($env:SYSTEM_DEFAULTWORKINGDIRECTORY)\_PSMicrosoftEntraID",
+	$WorkingDirectory = "$($env:SYSTEM_DEFAULTWORKINGDIRECTORY)\_PSMicrosoftSharepointOnline",
 	
 	$Repository = 'PSGallery',
 
@@ -24,7 +24,7 @@ param (
 	$IncludeAZ
 )
 
-$moduleName = 'PSMicrosoftEntraID'
+$moduleName = 'PSMicrosoftSharepointOnline'
 
 # Prepare Paths
 Write-PSFMessage -Level Host -Message "Creating working folders"

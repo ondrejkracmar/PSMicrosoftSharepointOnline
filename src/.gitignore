@@ -5,14 +5,14 @@
 *TempPoint*
 
 # Ignore staging info from Visual Studio
-library/PSMicrosoftEntraID/.vs/*
-library/PSMicrosoftEntraID/PSMicrosoftEntraID/bin/*
-library/PSMicrosoftEntraID/PSMicrosoftEntraID/obj/*
+library/PSMicrosoftSharepointOnline/.vs/*
+library/PSMicrosoftSharepointOnline/PSMicrosoftSharepointOnline/bin/*
+library/PSMicrosoftSharepointOnline/PSMicrosoftSharepointOnline/obj/*
 
 # ignore PowerShell Studio MetaData
-library/PSMicrosoftEntraID.csproj
-library/PSMicrosoftEntraID.csproj.bak
-library/PSMicrosoftEntraID.csprojs
+library/PSMicrosoftSharepointOnline.csproj
+library/PSMicrosoftSharepointOnline.csproj.bak
+library/PSMicrosoftSharepointOnline.csprojs
 
 # ignore the TestResults
 TestResults/*
