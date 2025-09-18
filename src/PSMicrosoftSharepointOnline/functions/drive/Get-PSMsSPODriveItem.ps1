@@ -61,12 +61,13 @@
                 }
             }
             'Site' {
-                [PSMicrosoftSharePointOnline.Files.Drives.Drive] $drive = Get-PSMsSPODrive -SiteUrl $SiteUrl -DriveName $DriveName
-                if ([object]::Equals($drive, $null)) {
+                [PSMicrosoftSharePointOnline.Files.Drives.Drive[]] $driveNameList = Get-PSMsSPODrive -SiteUrl $SiteUrl -DriveName $DriveName
+                if ([object]::Equals($driveNameList, $null)) {
                     Invoke-TerminatingException -Cmdlet $PSCmdlet -Message ((Get-PSFLocalizedString -Module $script:ModuleName -Name DriveItemSite.Get.Failed) -f $DriveName, $SiteUrl, $FolderPath)
                 }
             }
         }
+        [PSMicrosoftSharePointOnline.Files.Drives.Drive] $drive = $driveNameList | Where-Object -Property Name -Value $DriveName -EQ
         $path = if ([string]::IsNullOrEmpty($FolderPath.Trim('/'))) {
             "drives/{0}/root/children" -f $drive.Id
         }
