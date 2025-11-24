@@ -1,10 +1,10 @@
-﻿function Connect-PSMicrosoftSharepointOnline {
+﻿function Connect-PSMicrosoftSharepoitOnline {
 	<#
 	.SYNOPSIS
-		Establish a connection to an Entra Service.
+		Establish a connection to an Sharepoint Online.
 
 	.DESCRIPTION
-		Establish a connection to an Entra Service.
+		Establish a connection to an Sharepoint Online.
 		Prerequisite before executing any requests / commands.
 
 	.PARAMETER ClientID
@@ -129,13 +129,13 @@
 		This authentication flow is specific to a given environment and can for example enable a Github Action in a specific repository on a specific branch to authenticate, without needing to provide (and manage) a credential.
 		Some setup is required.
 
-		By default, this command is going to check all provided configurations ("Federation Providers") registered to PSMicrosoftSharepointOnline and use the first that applies.
-		Use "PSMicrosoftSharepointOnline" to pick a specific one to use.
-		Use "-Assertion" to handle the federated identity provider outside of PSMicrosoftSharepointOnline and simply provide the result for logon.
+		By default, this command is going to check all provided configurations ("Federation Providers") registered to PSMicrosoftEntraID and use the first that applies.
+		Use "PSMicrosoftEntraID" to pick a specific one to use.
+		Use "-Assertion" to handle the federated identity provider outside of PSMicrosoftEntraID and simply provide the result for logon.
 
 	.PARAMETER FederationProvider
 		The name of the Federation Provider to use. Overrides the automatic selection.
-		Federation Providers are an PSMicrosoftSharepointOnline concept and used to automatically do what is needed to access and use a Federated Credential, based on its environment.
+		Federation Providers are an PSMicrosoftEntraID concept and used to automatically do what is needed to access and use a Federated Credential, based on its environment.
 		See the documentation on Register-EntraFederationProvider for more details.
 
 	.PARAMETER Assertion
@@ -179,33 +179,33 @@
 		Usually determined by service connected to or the "Environment" parameter, but may be overridden in case of need.
 
 	.EXAMPLE
-		PS C:\> Connect-PSMicrosoftSharepointOnline -ClientID $clientID -TenantID $tenantID
+		PS C:\> Connect-PSMicrosoftSharepoitOnline -ClientID $clientID -TenantID $tenantID
 
 		Establish a connection to the graph API, prompting the user for login on their default browser.
 
 	.EXAMPLE
-		PS C:\> Connect-PSMicrosoftSharepointOnline -AsAzAccount
+		PS C:\> Connect-PSMicrosoftSharepoitOnline -AsAzAccount
 
 		Establish a connection to the graph API, using the current Az.Accounts session.
 
 	.EXAMPLE
-		PS C:\> Connect-PSMicrosoftSharepointOnline -ClientID $clientID -TenantID $tenantID -Certificate $cert
+		PS C:\> Connect-PSMicrosoftSharepoitOnline -ClientID $clientID -TenantID $tenantID -Certificate $cert
 
 		Establish a connection to the graph API using the provided certificate.
 
 	.EXAMPLE
-		PS C:\> Connect-PSMicrosoftSharepointOnline -ClientID $clientID -TenantID $tenantID -CertificatePath C:\secrets\certs\mde.pfx -CertificatePassword (Read-Host -AsSecureString)
+		PS C:\> Connect-PSMicrosoftSharepoitOnline -ClientID $clientID -TenantID $tenantID -CertificatePath C:\secrets\certs\mde.pfx -CertificatePassword (Read-Host -AsSecureString)
 
 		Establish a connection to the graph API using the provided certificate file.
 		Prompts you to enter the certificate-file's password first.
 
 	.EXAMPLE
-		PS C:\> Connect-PSMicrosoftSharepointOnline -Service Endpoint -ClientID $clientID -TenantID $tenantID -ClientSecret $secret
+		PS C:\> Connect-PSMicrosoftSharepoitOnline -Service Endpoint -ClientID $clientID -TenantID $tenantID -ClientSecret $secret
 
 		Establish a connection to Defender for Endpoint using a client secret.
 
 	.EXAMPLE
-		PS C:\> Connect-PSMicrosoftSharepointOnline -ClientID $clientID -TenantID $tenantID -VaultName myVault -Secretname GraphCert
+		PS C:\> Connect-PSMicrosoftSharepoitOnline -ClientID $clientID -TenantID $tenantID -VaultName myVault -Secretname GraphCert
 
 		Establish a connection to the graph API, after retrieving the necessary certificate from the specified Azure Key Vault.
 #>
