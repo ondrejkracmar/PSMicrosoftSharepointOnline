@@ -4,11 +4,12 @@
     .SYNOPSIS
         Get SharePoint Online site metadata via Microsoft Graph.
 
-    .DESCRIPTION
-        Resolves and returns a SharePoint site using one of:
-          - SiteUrl (e.g., https://contoso.sharepoint.com/sites/ProjectX)
-          - Hostname + RelativePath (e.g., contoso.sharepoint.com + /sites/ProjectX)
-          - SiteId (Graph composite id: hostname,siteId,webId)
+        .DESCRIPTION
+                Resolves and returns a SharePoint site using one of:
+                    - SiteUrl (e.g., https://contoso.sharepoint.com/sites/ProjectX)
+                    - Hostname + RelativePath (e.g., contoso.sharepoint.com + /sites/ProjectX)
+                    - SiteId (Graph composite id: hostname,siteId,webId)
+                    - GroupId (Microsoft 365 Group / Team – returns the connected SharePoint root site)
 
     .PARAMETER SiteUrl
         Full site URL, e.g. https://contoso.sharepoint.com/sites/ProjectX
@@ -21,6 +22,9 @@
 
     .PARAMETER SiteId
         Graph site identifier in form hostname,siteId,webId
+
+    .PARAMETER GroupId
+        Microsoft 365 Group (Team) Id. Alias: TeamID. When provided, resolves the SharePoint site connected to that Group/Team.
 
     .PARAMETER EnableException
         This parameters disables user-friendly warnings and enables the throwing of exceptions. This is less user friendly,
@@ -35,6 +39,10 @@
 
     .EXAMPLE
         Get-PSMsSPOSite -SiteId 'contoso.sharepoint.com,abc123,def456'
+
+    .EXAMPLE
+        Get-PSMsSPOSite -GroupId 11111111-2222-3333-4444-555555555555
+        Returns the SharePoint root site connected to the specified Microsoft 365 Group / Team and adds GroupId to the output object.
     #>
     [OutputType('PSMicrosoftTeams.Sites.Site')]
     [CmdletBinding(DefaultParameterSetName = 'Site')]
@@ -51,6 +59,11 @@
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Id')]
         [ValidateNotNullOrEmpty()]
         [string] $SiteId,
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Group')]
+        [Alias('TeamId')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateGroupIdentity()]
+        [string] $GroupId,
         [Parameter()]
         [switch] $EnableException,
         [Parameter()]
@@ -82,11 +95,26 @@
             'Id' {
                 [string] $path = 'sites/{0}' -f $SiteId
             }
+            'Group' {
+                # Graph endpoint returning the SharePoint root site of the Group/Team
+                [string] $path = 'groups/{0}/sites/root' -f $GroupId
+            }
         }
 
-        Invoke-PSFProtectedCommand -ActionString 'Site.Get' -ActionStringValues $path -Target $path -ScriptBlock {
+        $site = Invoke-PSFProtectedCommand -ActionString 'Site.Get' -ActionStringValues $path -Target $path -ScriptBlock {
             ConvertFrom-RestSite -InputObject (Invoke-EntraRequest -Service $service -Path $path -Query $query -Header $header -Method Get -ErrorAction Stop)
         } -EnableException:$EnableException -PSCmdlet $PSCmdlet -Continue -RetryCount $commandRetryCount -RetryWait $commandRetryWait -WhatIf:$false
+
+        if ($PSCmdlet.ParameterSetName -eq 'Group' -and $site) {
+            if ($site -is [array]) {
+                foreach ($s in $site) { Add-Member -InputObject $s -NotePropertyName GroupId -NotePropertyValue $GroupId -Force }
+            }
+            else {
+                Add-Member -InputObject $site -NotePropertyName GroupId -NotePropertyValue $GroupId -Force
+            }
+        }
+
+        $site
     }
 
     end {}
