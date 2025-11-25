@@ -1,4 +1,4 @@
-﻿function Connect-PSMicrosoftSharepoitOnline {
+﻿function Connect-PSMicrosoftSharepointOnline {
 	<#
 	.SYNOPSIS
 		Establish a connection to an Sharepoint Online.

@@ -1,10 +1,10 @@
 ﻿function Disconnect-PSMicrosoftSharepointOnline {
 	<#
 	.SYNOPSIS
-		Disconnect from an Microsoft EntraID Service.
+		Disconnect from an Microsoft Sharepoint Online Service.
 
 	.DESCRIPTION
-		Disconnect from an Microsoft EntraID Service.
+		Disconnect from an Microsoft Sharepoint Online Service.
 
 	.PARAMETER Service
 		The service for which to retrieve the token.
